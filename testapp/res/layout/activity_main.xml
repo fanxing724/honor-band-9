@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:background="@color/bg">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textColor="@color/accent"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="GATT UUID（已锁定，防误触）"
+        android:textColor="@color/fg"
+        android:textSize="12sp"
+        android:layout_marginTop="6dp" />
+
+    <EditText
+        android:id="@+id/etService"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="c5f0ad48-cc27-48fd-9f67-8dc8e8f4a9cb"
+        android:textColor="@color/fg"
+        android:textSize="11sp"
+        android:inputType="none"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:longClickable="false"
+        android:cursorVisible="false" />
+
+    <EditText
+        android:id="@+id/etWrite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="2a5fc8bd-3de4-43cb-9449-354bcdeccc70"
+        android:textColor="@color/fg"
+        android:textSize="11sp"
+        android:inputType="none"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:longClickable="false"
+        android:cursorVisible="false" />
+
+    <EditText
+        android:id="@+id/etNotify"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="a563d757-b216-48bc-8a0f-e8dde1f916aa"
+        android:textColor="@color/fg"
+        android:textSize="11sp"
+        android:inputType="none"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:longClickable="false"
+        android:cursorVisible="false" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnScan"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="扫描" />
+
+        <Button
+            android:id="@+id/btnConnect"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="连接选中" />
+
+        <Button
+            android:id="@+id/btnDisconnect"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="断开" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="发现的设备（点击选中，再点“连接选中”）"
+        android:textColor="@color/fg"
+        android:textSize="12sp" />
+
+    <ListView
+        android:id="@+id/listDevices"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:textColor="@color/fg" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="日志"
+        android:textColor="@color/accent"
+        android:textSize="12sp"
+        android:layout_marginTop="6dp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/tvLog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/fg"
+            android:textSize="11sp"
+            android:typeface="monospace" />
+    </ScrollView>
+
+</LinearLayout>

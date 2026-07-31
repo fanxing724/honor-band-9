@@ -1,0 +1,32 @@
+# Proprietary HONOR material — never commit (copyright)
+*.apk
+*.idsig
+*.so
+*.dex
+*.smali
+smali*/
+dexout/
+extracted/
+native/
+honor-health*.apk
+
+# Secrets / signing
+*.keystore
+*.jks
+*.pem
+*.key
+.env
+**/debug.keystore
+
+# Tooling / caches
+android-sdk/
+*.db
+androguard.db
+node_modules/
+__pycache__/
+*.pyc
+
+# Build outputs
+testapp/build/
+build/
+*.class
