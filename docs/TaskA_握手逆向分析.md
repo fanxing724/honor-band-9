@@ -116,7 +116,7 @@
    直到 `bindPeer/authenticatePeer` 返回 `0x80000006` → 认证成功，拿到 sessionKey。
 5. 之后 MBB 载荷加解密走 `AuthManager.createCommonAuthConn` 的 sessionKey（AES 模式待 6 节确认）。
 - **优点**：无需复刻白盒/HiChain 密码学，直接用原厂实现；`getMbbData()` 已给出精确发包字节。
-- **唯一风险**：`libwhitebox.so`/`libmbblink.so` 可能校验调用方**包名/签名**。缓解：Task C 先在真机验证 native 能否初始化；必要时把 testapp 包名伪装为 `com.hihonor.health`（仅用于本人自测）。
+- **唯一风险**：`libwhitebox.so`/`libmbblink.so` 可能校验调用方**包名/签名**。缓解：Task C 先在真机验证 native 能否初始化；必要时把 testapp 包名伪装为 `com.hihonor.health`（仅用于本地功能验证）。
 
 **路线 2（纯自研，不依赖 HiChain）——已降级为备选**
 - Android Conscrypt `X25519PrivateKeyParameters` 做 ECDH；复刻 `SecretKeyUtils.getX25519SharedKey` 取 32 字节；

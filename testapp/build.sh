@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
-SDK=/mnt/workspace/reverse-honor/android-sdk
+# Resolve the testapp directory from this script's location (portable, no hardcoded paths).
+APP="$(cd "$(dirname "$0")" && pwd)"
+# Android SDK location is configurable via ANDROID_SDK_ROOT; defaults to a sibling ./android-sdk.
+SDK="${ANDROID_SDK_ROOT:-$APP/android-sdk}"
 BT=$SDK/build-tools/34.0.0
 PLAT=$SDK/platforms/android-34
 ANDROID_JAR=$PLAT/android.jar
@@ -8,9 +11,7 @@ AAPT2=$BT/aapt2
 D8=$BT/d8
 ZIPALIGN=$BT/zipalign
 APKSIGNER=$BT/apksigner
-KEYTOOL=/usr/lib/jvm/java-17-openjdk-amd64/bin/keytool
-
-APP=/mnt/workspace/reverse-honor/testapp
+KEYTOOL="${JAVA_HOME:-/usr/lib/jvm/java-17-openjdk-amd64}/bin/keytool"
 SRC=$APP/src
 RES=$APP/res
 MANIFEST=$APP/AndroidManifest.xml

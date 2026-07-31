@@ -16,7 +16,6 @@ independent Android app can talk to the band without the official 荣耀运动�
 |------|------|
 | `docs/TaskA_握手逆向分析.md` | **Main deliverable** — full reverse of the X25519 + HiChain auth handshake, MbbCommand wire format, and the port plan. |
 | `docs/AI接力交接文档.md` | Project handoff / task plan (A–D). |
-| `docs/WORKSPACE_GUIDE.md` | Build/analysis environment notes. |
 | `docs/reverse-honor-notes.md` | Working notes on the local (git-ignored) analysis tree. |
 | `scripts/androguard/*.py` | androguard 4.1.4 scripts used to disassemble & map the auth classes. |
 | `scripts/honor-ble.js` | Reference implementation of the MCF/D2D/URPC stack (study aid). |

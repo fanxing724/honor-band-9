@@ -1,6 +1,6 @@
 # reverse-honor 目录说明（供接力 AI）
 
-> 权威交接文档在上级目录：`/mnt/workspace/AI接力交接文档.md`（先读它）。
+> 权威交接文档：`AI接力交接文档.md`（先读它）。
 > 本目录已清理，仅保留**已验证/在用**的资产。早期错误方向的产物（0xfee0/LPv2 扫描 hits、
 > 网页版 scanner、一次性脚本、androguard 缓存）已删除，勿再找。
 

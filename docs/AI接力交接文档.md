@@ -37,12 +37,12 @@
 ## 三、已下载与已逆向的资产
 
 ### 3.1 源 APK
-- 路径：`/mnt/workspace/reverse-honor/honor-health.apk`（242MB）
+- 路径：`honor-health.apk`（约 242MB，逆向输入，不入库；见 `.gitignore`）
 - 包名 `com.hihonor.health`，版本 **v17.22.1.301**
-- 来源：腾讯 CDN（本环境可访问），非 GitHub（GitHub 被墙，jadx 装不了）
+- 来源：从官方应用分发渠道合法获取；jadx 在本环境未能安装，改用 androguard 静态分析
 
 ### 3.2 内嵌 Python SDK（协议真相在此，已读关键文件）
-路径：`/mnt/workspace/reverse-honor/extracted/py/assets/python/`
+路径：`extracted/py/assets/python/`（从 APK 提取，`git-ignore`）
 - `mcf/link/char_dev.py` —— MCF 帧收发包/重组/CRC（帧格式与 CRC 范围）。
 - `mcf/link/link.py` —— MCF 链路层常量与帧封装。
 - `mcf/trans/d2d.py` —— D2D 包定义、`pkt_gen`、ACK/RSP 处理（确认 `daemon_id=1`、attr 编码）。
@@ -52,7 +52,7 @@
 - `urpc/src/urpc_utils.py` —— 异常类。
 
 ### 3.3 Native 认证库（已提取，本轮新发现）
-路径：`/mnt/workspace/reverse-honor/native/lib/<arch>/`
+路径：`native/lib/<arch>/`（从 APK 提取，`git-ignore`）
 - **`libmbblink.so`** —— 导出：
   - `GenerateX25519KeyPair`、`GetX25519SharedKey`
   - `X25519`、`X25519_keypair`、`X25519_public_from_private`、`x25519_ge_scalarmult*` 等
@@ -62,7 +62,7 @@
 - `libwhitebox.so` —— 白盒解密支撑库。
 
 ### 3.4 dex（已提取，待深挖握手编排）
-路径：`/mnt/workspace/reverse-honor/dexout/*.dex`（classes.dex … classes27.dex）
+路径：`dexout/*.dex`（classes.dex … classes27.dex，从 APK 提取，`git-ignore`）
 grep 命中关键类（**下一步要逆向的握手编排**）：
 - `com.hihonor.deviceservice.impl.link.mbb.MbbLink`（及 `MbbLink.kt`）
 - `com.hihonor.hwddmp.connection.bluetooth.mbb.MbbLinkProtoV2Impl`（及 `MbbLinkProtoArgv`、`MbbLinkProtoManager`）
@@ -111,15 +111,15 @@ len = 整帧字节数（大端）；CRC16 范围 = frame[1 .. 末尾前3字节]�
    - 第2步 `_link_up2`：`input = JSON '{"version":66560}'`（即 `0x10400`）
 
 ### 5.3 参考实现
-- `/mnt/workspace/reverse-honor/honor-ble.js` —— Web/Capacitor 版协议栈（单测通过，因手机不能跑网页仅作参考）。
+- `scripts/honor-ble.js` —— Web/Capacitor 版协议栈（单测通过，因手机不能跑网页仅作参考）。
 - 真机验证用的 Java 版在 `testapp/`（见第六节），CRC16/帧/D2D/URPC 逻辑与上面一致。
 
 ---
 
 ## 六、测试 App（真机验证载体，已构建可安装）
 
-路径：`/mnt/workspace/reverse-honor/testapp/`
-产出 APK：**`/mnt/workspace/reverse-honor/testapp/honor-band-test.apk`**（已签名 debug）
+路径：`testapp/`
+产出 APK：**`testapp/honor-band-test.apk`**（已签名 debug，见 `.gitignore`）
 
 ### 功能
 扫描 BLE → 列表选设备 → 连接 → 请求 MTU(517) → 发现服务 → 启用 notify(写 CCCD 0x0100) → 自动 `linkUp` 两步 + `_ping` 存活测试 → 屏幕实时日志（含**完整 GATT 拓扑**、发出的帧 hex、收到的 notify 与 MCF 帧解析）。
@@ -130,7 +130,7 @@ len = 整帧字节数（大端）；CRC16 范围 = frame[1 .. 末尾前3字节]�
 3. **自动配对**：连接后若未配对则 `createBond()`，配对成功(10→11→12)后重发握手。
 4. **强制 WRITE_NO_RESPONSE**：写特征属性为 WWNR，按官方用法用无响应写。
 
-### 构建方式（无 Gradle，因 maven.google.com 被墙）
+### 构建方式（无 Gradle，因 maven.google.com 不可达）
 ```
 JDK17 (apt install openjdk-17-jdk-headless)
 sdkmanager 装 build-tools;34.0.0 + platforms;android-34（dl.google.com 可达）
@@ -184,13 +184,13 @@ javac → d8 --min-api 21 --lib android.jar → aapt2 compile/link --auto-add-ov
 
 | 项 | 状态 |
 |----|------|
-| 本机 | PAI-DSW（CPU，无 GPU，无外网 GitHub） |
-| GitHub / jadx | 被墙，不可用 |
+| 分析机 | CPU 机器，无 GPU |
+| GitHub / jadx | 本环境不可用；改用 androguard 静态分析 |
 | pypi / androguard / dl.google.com | 可达 |
 | JDK | apt 装 `openjdk-17-jdk-headless` 成功 |
-| Android SDK | sdkmanager 装 `build-tools;34.0.0` + `platforms;android-34` 成功（dl.google.com 可达） |
-| maven.google.com（Gradle 依赖） | 被墙 → 不能走 Gradle，改手动 javac+d8+aapt2 流水线 |
-| 用户设备 | HONOR Band 9-EF1，MAC `34:86:DA:31:DE:F1`；手机型号/Android 版本未知（但已验证支持 Android 13+ 3参回调路径） |
+| Android SDK | sdkmanager 装 `build-tools;34.0.0` + `platforms;android-34` 成功 |
+| maven.google.com（Gradle 依赖） | 不可达 → 不能走 Gradle，改手动 javac+d8+aapt2 流水线 |
+| 用户设备 | HONOR Band 9-EF1，MAC `AA:BB:CC:DD:EE:FF`（示例，已脱敏）；手机型号/Android 版本未知（但已验证支持 Android 13+ 3参回调路径） |
 
 ---
 
