@@ -1,3 +1,16 @@
+<!-- fanxing-style:start -->
+<picture>
+  <source media="(prefers-color-scheme: light)" srcset="https://fanxing724.github.io/new-make/fanxing724/projects/honor-band-9/cover.light.svg">
+  <img alt="荣耀手环 9 · 探索手记" src="https://fanxing724.github.io/new-make/fanxing724/projects/honor-band-9/cover.svg" width="100%">
+</picture>
+
+**等审核的时候，好奇心已经先出发了。**
+
+因为开发者资格还在审核，又想先玩玩手环，于是有了这些尝试。这里保留探索设备与数据的过程，已经观察到的结果和还没验证的设想分别记录。
+
+<sub>番星 / 星轨手记 · <a href="https://fanxing724.github.io/new-make/fanxing724/projects/style.html">风格样板</a> · <a href="https://fanxing724.github.io/">个人小站</a></sub>
+<!-- fanxing-style:end -->
+
 # honor-band-9
 
 Reverse-engineering notes and tooling for reading **your own** HONOR Band health data
